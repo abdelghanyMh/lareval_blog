@@ -18,16 +18,19 @@ Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
 
 // posts routes 
-Route::view('/posts/create', 'create')->name('posts.create');
+Route::name('posts.')->prefix('posts')->group(function () {
 
-Route::post('/posts', function (Request $request) {
-    $request->validate([
-        'title' => 'required',
-        'description' => ['required', 'min:10'],
-    ]);
+    Route::view('/create', 'posts.create')->name('create');
+
+    Route::post('/', function (Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'description' => ['required', 'min:10'],
+        ]);
 
 
-    return redirect()
-        ->route('posts.create')
-        ->with('success', 'Post is submitted! Title: ' . $request->input('title') . ' Description: ' . $request->input('description'));
-})->name('posts.store');
+        return redirect()
+            ->route('posts.create')
+            ->with('success', 'Post is submitted! Title: ' . $request->input('title') . ' Description: ' . $request->input('description'));
+    })->name('store');
+});
