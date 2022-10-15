@@ -28,14 +28,11 @@ class PostController extends Controller
      */
     public function store(PostFormRequest $request)
     {
-        $request->validate();
+        $validated = $request->validate();
 
         // store the VALIDATED post to the database
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-        $post->save();
 
+        $post = Post::create($validated);
 
         return redirect()
             ->route('posts.show', [$post])
@@ -77,13 +74,10 @@ class PostController extends Controller
      */
     public function update(PostFormRequest $request, Post $post)
     {
-        $request->validate();
+        $validated = $request->validate();
 
-        // store the VALIDATED post to the database
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-        $post->save();
-
+        // update the VALIDATED post to the database
+        $post->update($validated);
 
         return redirect()
             ->route('posts.show', [$post])
