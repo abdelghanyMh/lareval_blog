@@ -15,7 +15,18 @@
     <ul class="nav">
         <li><a class="{{ request()->routeIs('home')?'active':''}}" href="{{route('home')}}">Home</a></li>
         <li><a class="{{ request()->routeIs('about')?'active':''}}" href="{{route('about')}}">About</a></li>
+        @auth
         <li><a class="{{ request()->routeIs('posts.create')?'active':''}}" href="{{route('posts.create')}}">Create posts</a></li>
+        <li><a href="{{route('logout')}}">Logout</a></li>
+        <li class="username">
+            <p>logged in as <b>{{Auth::user()->name}}</b></p>
+        </li>
+
+        @else
+        <li><a class="{{ request()->routeIs('register') ? 'active' : '' }}" href="{{ route('register') }}">Register</a></li>
+        <li><a class="{{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a></li>
+
+        @endauth
     </ul>
 
     <!-- only include _errors subview if there is errors-->
