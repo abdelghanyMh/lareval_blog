@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PostFormRequest;
 
 use App\Models\Post;
+
 
 class PostController extends Controller
 {
@@ -25,12 +26,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => ['required', 'min:10'],
-        ]);
+        $request->validate();
 
         // store the VALIDATED post to the database
         $post = new Post();
@@ -77,14 +75,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostFormRequest $request, Post $post)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => ['required', 'min:10'],
-        ]);
-
-
+        $request->validate();
 
         // store the VALIDATED post to the database
         $post->title = $request->input('title');
