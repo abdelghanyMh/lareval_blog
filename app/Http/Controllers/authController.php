@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class authController extends Controller
+class AuthController extends Controller
 {
     public function register(Request $request)
     {
@@ -16,7 +16,7 @@ class authController extends Controller
         if ($request->isMethod('get')) {
             return view('auth.register');
         }
-
+        
         // handel POST /register
         $request->validate([
             'name' => 'required',
@@ -27,7 +27,7 @@ class authController extends Controller
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->input('email')),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         return redirect()
