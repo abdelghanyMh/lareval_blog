@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
+
 class PostController extends Controller
 {
 
@@ -30,9 +32,16 @@ class PostController extends Controller
             'description' => ['required', 'min:10'],
         ]);
 
+        // store the VALIDATED post to the database
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+        $post->save();
+
+
         return redirect()
             ->route('posts.create')
-            ->with('success', 'Post is submitted! Title: ' . $request->input('title') . ' Description: ' . $request->input('description'));
+            ->with('success', 'Post is submitted! Title: ' . $post->title  . ' Description: ' . $post->description);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::view('/', 'home')->name('home');
-Route::view('/about', 'about')->name('about');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 /**
  * posts routes 
  * this will handel all crud  methods related to the resource post
@@ -25,5 +26,3 @@ Route::view('/about', 'about')->name('about');
  * https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
  */
 Route::resource('posts', PostController::class)->except(['index']);
-
-
