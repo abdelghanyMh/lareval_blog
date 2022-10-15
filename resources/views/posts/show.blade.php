@@ -13,7 +13,7 @@
             @method('DELETE')
             <button class="delete" type="submit">Delete post</button>
         </form>
-
+        <small>Posted by: <b>{{$post->user->name}}</b></small>
     </div>
 </div>
 @endsection

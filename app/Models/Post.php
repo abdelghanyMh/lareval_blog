@@ -11,4 +11,11 @@ class Post extends Model
 
     // allow Mass Assignment on the following fields
     protected $fillable = ['title', 'description'];
+
+    // return publisher of the post
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

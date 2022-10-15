@@ -28,11 +28,10 @@ class PostController extends Controller
      */
     public function store(PostFormRequest $request)
     {
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         // store the VALIDATED post to the database
-
-        $post = Post::create($validated);
+        $post = $request->user()->posts()->create($validated);
 
         return redirect()
             ->route('posts.show', [$post])
