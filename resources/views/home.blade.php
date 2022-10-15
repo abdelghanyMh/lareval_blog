@@ -2,6 +2,12 @@
 @section('title','Home')
 
 @section('content')
-<h1>Home Page</h1>
-<p>this the home page</p>
+@foreach ($posts as $post)
+<div class="post-item">
+    <div class="post-content">
+        <h2>{{ $post->title }}</h2>
+        <p>{{ $post->description }}</p>
+    </div>
+</div>
+@endforeach
 @endsection
