@@ -13,6 +13,9 @@ class PostFormRequest extends FormRequest
      */
     public function authorize()
     {
+        // can be used authorize update 
+        // $post = Post::find($this->route('post'));
+        // return $post && $this->user()->can('update',$post);
         return true;
     }
 
