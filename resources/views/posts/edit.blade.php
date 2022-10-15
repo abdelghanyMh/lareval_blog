@@ -5,7 +5,7 @@
 @section('content')
 <h1>Update Post {{ $post->title }}</h1>
 
-<form method="POST" action="{{ route('posts.update', ['post' => $post->id]) }}">
+<form method="POST" action="{{ route('posts.update', [$post]) }}">
     @csrf
     @method('PUT')
     <label>Title</label>
