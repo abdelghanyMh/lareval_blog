@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -16,21 +17,13 @@ use Illuminate\Http\Request;
 
 Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
-
-// posts routes 
-Route::name('posts.')->prefix('posts')->group(function () {
-
-    Route::view('/create', 'posts.create')->name('create');
-
-    Route::post('/', function (Request $request) {
-        $request->validate([
-            'title' => 'required',
-            'description' => ['required', 'min:10'],
-        ]);
+/**
+ * posts routes 
+ * this will handel all crud  methods related to the resource post
+ * php artisan make:controller name --resource
+ * php artisan route:list
+ * https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
+ */
+Route::resource('posts', PostController::class)->except(['index']);
 
 
-        return redirect()
-            ->route('posts.create')
-            ->with('success', 'Post is submitted! Title: ' . $request->input('title') . ' Description: ' . $request->input('description'));
-    })->name('store');
-});
