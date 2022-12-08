@@ -10,6 +10,10 @@ use App\Models\Post;
 class PostController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -76,7 +80,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         // update the VALIDATED post to the database
         $post->update($validated);

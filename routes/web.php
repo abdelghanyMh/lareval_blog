@@ -27,7 +27,8 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
  * php artisan route:list
  * https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
  */
-Route::resource('posts', PostController::class)->except(['index'])->middleware('auth');
+Route::resource('posts', PostController::class)->except(['index']);
+
 
 
 Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
